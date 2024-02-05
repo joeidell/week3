@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrisburg & Lancaster on Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLA5YWZo4zvuQOafSPKCniHYqmfryRzwZjPWzLwDSiEg=" crossorigin=""/>
+</head>
 <body>
     <div id="mapid"></div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-8TNZ320Ay98TLSAwRkvLS+yA7QvWAzcjMLFFBh2plpMY=" crossorigin=""></script>
@@ -10,29 +16,34 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Assuming population data for Harrisburg and Lancaster
+        // Population data for Harrisburg and Lancaster 
         var harrisburgPopulation = 50135;
         var lancasterPopulation = 57503;
 
+        // Circles for Harrisburg and Lancaster
         var harrisburgCircle = L.circle([40.27, -76.88], {
+            color: 'blue',
             fillColor: 'blue',
             fillOpacity: 0.5,
             weight: 2,
-            stroke: true,
-            color: 'gold'
+            dashArray: '3', // Optional dashed outline
+            dashOffset: '5', // Adjust dash offset for customization
+            radius: 500 // Adjust radius as needed
         }).addTo(map);
 
         var lancasterCircle = L.circle([40.04, -76.31], {
+            color: 'red',
             fillColor: 'blue',
             fillOpacity: 0.5,
             weight: 2,
-            stroke: true,
-            color: 'red'
+            dashArray: '3', // Optional dashed outline
+            dashOffset: '5', // Adjust dash offset for customization
+            radius: 500 // Adjust radius as needed
         }).addTo(map);
 
-        harrisburgCircle.bindTooltip("<b>Name:</b> <i>Harrisburg, PA</i>, <b>Population:</b> <i>" + harrisburgPopulation + "</i>").openTooltip();
-
-        lancasterCircle.bindTooltip("<b>Name:</b> <i>Lancaster, PA</i>, <b>Population:</b> <i>" + lancasterPopulation + "</i>").openTooltip();
+        // Popups with city names and populations
+        harrisburgCircle.bindPopup("<b>Harrisburg, PA</b><br>Population: " + harrisburgPopulation).openPopup();
+        lancasterCircle.bindPopup("<b>Lancaster, PA</b><br>Population: " + lancasterPopulation).openPopup();
     </script>
 </body>
 </html>
