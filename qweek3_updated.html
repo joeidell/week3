@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <body>
     <div id="mapid"></div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-8TNZ320Ay98TLSAwRkvLS+yA7QvWAzcjMLFFBh2plpMY=" crossorigin=""></script>
@@ -9,30 +10,29 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Assuming population data for Harrisburg and Lancaster 
+        // Assuming population data for Harrisburg and Lancaster
         var harrisburgPopulation = 50135;
         var lancasterPopulation = 57503;
 
-var harrisburgCircle = L.circle([40.27, -76.88], {
-  color: 'blue',
-  fillColor: 'blue', 
-  fillOpacity: 0.5,
-  weight: 2,
-  stroke: true,
-  color: 'gold'  
-}).addTo(map);
+        var harrisburgCircle = L.circle([40.27, -76.88], {
+            fillColor: 'blue',
+            fillOpacity: 0.5,
+            weight: 2,
+            stroke: true,
+            color: 'gold'
+        }).addTo(map);
 
-var lancasterCircle = L.circle([40.04, -76.31], {
-  color: 'blue',
-  fillColor: 'blue',
-  fillOpacity: 0.5, 
-  weight: 2,
-  stroke: true,
-  color: 'red'
-}).addTo(map);
+        var lancasterCircle = L.circle([40.04, -76.31], {
+            fillColor: 'blue',
+            fillOpacity: 0.5,
+            weight: 2,
+            stroke: true,
+            color: 'red'
+        }).addTo(map);
 
-harrisburgCircle.bindTooltip("<b>Name:</b><i>Harrisburg, PA</i>, <b>Population:</b><i>50,135</i>");
+        harrisburgCircle.bindTooltip("<b>Name:</b> <i>Harrisburg, PA</i>, <b>Population:</b> <i>" + harrisburgPopulation + "</i>").openTooltip();
 
-lancasterCircle.bindTooltip("<b>Name</b><i>Lancaster, PA</i><b>Population:</b><i>57503</i>");
+        lancasterCircle.bindTooltip("<b>Name:</b> <i>Lancaster, PA</i>, <b>Population:</b> <i>" + lancasterPopulation + "</i>").openTooltip();
+    </script>
 </body>
 </html>
