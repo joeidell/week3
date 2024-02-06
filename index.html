@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harrisburg & Lancaster on Leaflet Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLA5YWZo4zvuQOafSPKCniHYqmfryRzwZjPWzLwDSiEg=" crossorigin=""/>
+  <title>Harrisburg and Lancaster on Leaflet Map</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
+
 <body>
-    <div id="mapid"></div>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-8TNZ320Ay98TLSAwRkvLS+yA7QvWAzcjMLFFBh2plpMY=" crossorigin=""></script>
-    <script>
-        var map = L.map('mapid').setView([40.27, -76.88], 10);
+  <div id="map" style="width: 800px; height: 500px;"></div>
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-        // Population data for Harrisburg and Lancaster 
-        var harrisburgPopulation = 50135;
-        var lancasterPopulation = 57503;
+  <script>
+    // Map center and zoom level
+    var map = L.map('map').setView([40.27, -76.88], 9);
 
-        // Circles for Harrisburg and Lancaster
-        var harrisburgCircle = L.circle([40.27, -76.88], {
-            color: 'blue',
-            fillColor: 'blue',
-            fillOpacity: 0.5,
-            weight: 2,
-            dashArray: '3', // Optional dashed outline
-            dashOffset: '5', // Adjust dash offset for customization
-            radius: 500 // Adjust radius as needed
-        }).addTo(map);
+    // Tile layer  https://leafletjs.com/reference.html#tilelayer
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    }).addTo(map);
 
-        var lancasterCircle = L.circle([40.04, -76.31], {
-            color: 'red',
-            fillColor: 'blue',
-            fillOpacity: 0.5,
-            weight: 2,
-            dashArray: '3', // Optional dashed outline
-            dashOffset: '5', // Adjust dash offset for customization
-            radius: 500 // Adjust radius as needed
-        }).addTo(map);
+    // Cities
+    var Harrisburg = {
+      name: 'Harrisburg',
+      lat: 40.27,
+      lng: -76.88,
+      population: 50135
+    };
 
-        // Popups with city names and populations
-        harrisburgCircle.bindPopup("<b>Harrisburg, PA</b><br>Population: " + harrisburgPopulation).openPopup();
-        lancasterCircle.bindPopup("<b>Lancaster, PA</b><br>Population: " + lancasterPopulation).openPopup();
-    </script>
+    var Lancaster = {
+      name: 'Lancaster',
+      lat: 40.04,
+      lng: -76.31,
+      population: 57503
+    };
+
+    // Add circle markers https://leafletjs.com/reference.html#circlemarker
+	  //Tooltips https://leafletjs.com/reference.html#tooltip
+    L.circle([Harrisburg.lat, Harrisburg.lng], {
+      
+      color: 'gold',
+      fillColor: 'blue',
+      weight: 6
+    })
+      .bindTooltip("<b><i>Name:</i></b> <i>" + Harrisburg.name + "</i><br><b><i>Population:</i></b> <i>" + Harrisburg.population.toLocaleString() + "</i>")
+      .addTo(map);
+
+    L.circle([Lancaster.lat, Lancaster.lng], {
+    
+      color: 'red',
+      fillColor: 'blue',
+      weight: 6
+    })
+      .bindTooltip("<b><i>Name:</i></b> <i>" + Lancaster.name + "</i><br><b><i>Population:</i></b> <i>" + Lancaster.population.toLocaleString() + "</i>")
+      .addTo(map);
+  </script>
+
 </body>
 </html>
